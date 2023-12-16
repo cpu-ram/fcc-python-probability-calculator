@@ -19,13 +19,13 @@ class Hat:
     def draw(self, n):
         result = []
 
-        if (n < 1):
+        if n < 1:
             raise ValueError()
-        if (n > len(self.data)):
+        if n > len(self.data):
             return self.contents
 
         contentsCopy = copy.deepcopy(self.contents)
-        while (len(contentsCopy) > 0):
+        while len(contentsCopy) > 0:
             randomNumber = random.randrange(0, len(contentsCopy))
             element = contentsCopy.pop(randomNumber)
             result += element
@@ -50,5 +50,5 @@ def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
         drawsDict = map(arrayToDict, draws)
         expected_color_names = expected_balls
         for element in drawsDict:
-            if (set(vars(element).keys()) == set(vars(expected_balls).keys())):
+            if set(vars(element).keys()) == set(vars(expected_balls).keys()):
                 pass
