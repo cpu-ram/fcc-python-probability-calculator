@@ -24,22 +24,22 @@ class Hat:
         if n > len(self.data):
             return self.contents
 
-        contentsCopy = copy.deepcopy(self.contents)
-        while len(contentsCopy) > 0:
-            randomNumber = random.randrange(0, len(contentsCopy))
-            element = contentsCopy.pop(randomNumber)
+        contents_copy = copy.deepcopy(self.contents)
+        while len(contents_copy) > 0:
+            random_number = random.randrange(0, len(contents_copy))
+            element = contents_copy.pop(random_number)
             result += element
         return result
 
 
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
-    matchesFound = 0
+    matches_found = 0
 
     draws = []
     for index in range(0, num_experiments):
         draws.append(hat.draw(num_balls_drawn))
 
-        def arrayToDict():
+        def array_to_dict():
             return reduce(
                 lambda x, y:
                     x.update({'y': x['y']+1}) if hasattr(x,
@@ -47,8 +47,8 @@ def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
                 draws,
                 {}
             )
-        drawsDict = map(arrayToDict, draws)
+        draws_dict = map(array_to_dict, draws)
         expected_color_names = expected_balls
-        for element in drawsDict:
+        for element in draws_dict:
             if set(vars(element).keys()) == set(vars(expected_balls).keys()):
                 pass
