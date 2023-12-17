@@ -1,9 +1,12 @@
+"""A naive probability calculator"""
 from functools import reduce
 import copy
 import random
 
 
 class Hat:
+    """An abstraction representing the possible
+    outcomes and their likely frequency for a single event"""
     contents = []
     data = []
 
@@ -11,12 +14,13 @@ class Hat:
         self.data = kwargs
         self.contents = reduce((
             lambda x, y:
-                x.append(str(y)*self.data[str(y)])),
+                x.append(str(y) * self.data[str(y)])),
             vars(self.data).keys(),
             self.contents
         )
 
     def draw(self, n):
+        """method that returns n items randomly chosen from the ones stored"""
         result = []
 
         if n < 1:
@@ -33,6 +37,8 @@ class Hat:
 
 
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
+    """function that finds the probability of a specific
+    combination of events under given conditions"""
     matches_found = 0
 
     draws = []
@@ -42,8 +48,8 @@ def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
         def array_to_dict():
             return reduce(
                 lambda x, y:
-                    x.update({'y': x['y']+1}) if hasattr(x,
-                                                         'y') else x.update('y', 1),
+                    x.update({'y': x['y'] + 1}) if hasattr(x,
+                                                           'y') else x.update('y', 1),
                 draws,
                 {}
             )
