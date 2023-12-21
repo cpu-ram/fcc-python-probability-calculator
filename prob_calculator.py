@@ -28,7 +28,7 @@ class Hat:
             return self.contents
 
         contents_copy = copy.deepcopy(self.contents)
-        while len(contents_copy) > 0:
+        while len(result) < n:
             random_number = random.randrange(0, len(contents_copy))
             element = contents_copy.pop(random_number)
             result.append(element)
