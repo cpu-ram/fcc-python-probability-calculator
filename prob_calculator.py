@@ -8,14 +8,14 @@ class Hat:
     """An abstraction representing the possible
     outcomes and their likely frequency for a single event"""
     contents = []
-    data = []
+    data = {}
 
     def __init__(self, **kwargs):
         self.data = kwargs
         self.contents = reduce((
             lambda x, y:
                 x.append(str(y) * self.data[str(y)])),
-            vars(self.data).keys(),
+            list(self.data.keys()),
             self.contents
         )
 
