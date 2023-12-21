@@ -12,11 +12,10 @@ class Hat:
 
     def __init__(self, **kwargs):
         self.data = kwargs
-        self.contents = reduce((
-            lambda x, y:
-                x.append(str(y) * self.data[str(y)])),
+        self.contents = reduce(
+            lambda x, y: x + [str(y)] * self.data[str(y)],
             list(self.data.keys()),
-            self.contents
+            []
         )
 
     def draw(self, n):
