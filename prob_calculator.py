@@ -31,7 +31,7 @@ class Hat:
         while len(contents_copy) > 0:
             random_number = random.randrange(0, len(contents_copy))
             element = contents_copy.pop(random_number)
-            result += element
+            result.append(element)
         return result
 
 
