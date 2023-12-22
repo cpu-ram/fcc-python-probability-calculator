@@ -62,4 +62,4 @@ def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
                     break
             if (matches_so_far):
                 matching_draw_count += 1
-    return matching_draw_count
+    return matching_draw_count/num_experiments
