@@ -44,16 +44,22 @@ def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
     for index in range(0, num_experiments):
         draws.append(hat.draw(num_balls_drawn))
 
-        def array_to_dict():
-            return reduce(
-                lambda x, y:
-                    x.update({'y': x['y'] + 1}) if hasattr(x,
-                                                           'y') else x.update('y', 1),
-                draws,
-                {}
-            )
-        draws_dict = map(array_to_dict, draws)
-        expected_color_names = expected_balls
-        for element in draws_dict:
-            if set(vars(element).keys()) == set(vars(expected_balls).keys()):
-                pass
+    def array_to_dict(arr):
+        return reduce(
+            lambda x, y: {**x, y:
+                          x.get(y, 0)+1},
+            arr,
+            {}
+        )
+    draws_dict = list(map(array_to_dict, draws))
+    matching_draw_count = 0
+    for element in draws_dict:
+        if set(element.keys()) == set((expected_balls).keys()):
+            matches_so_far = True
+            for key in element.keys():
+                if element[key] != expected_balls[key]:
+                    matches_so_far = False
+                    break
+            if (matches_so_far):
+                matching_draw_count += 1
+    return matching_draw_count
