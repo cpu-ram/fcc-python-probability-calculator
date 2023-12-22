@@ -27,10 +27,10 @@ class Hat:
         if n > len(self.contents):
             return self.contents
 
-        contents_copy = copy.deepcopy(self.contents)
+        contents = self.contents
         while len(result) < n:
-            random_number = random.randrange(0, len(contents_copy))
-            element = contents_copy.pop(random_number)
+            random_number = random.randrange(0, len(contents))
+            element = contents.pop(random_number)
             result.append(element)
         return result
 
@@ -38,11 +38,15 @@ class Hat:
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
     """function that finds the probability of a specific
     combination of events under given conditions"""
+    original_hat_data = copy.deepcopy(hat.data)
+    hat_in_use = Hat(**original_hat_data)
+
     matches_found = 0
 
     draws = []
     for index in range(0, num_experiments):
-        draws.append(hat.draw(num_balls_drawn))
+        draws.append(hat_in_use.draw(num_balls_drawn))
+        hat_in_use = Hat(**original_hat_data)
 
     def array_to_dict(arr):
         return reduce(
@@ -57,7 +61,7 @@ def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
         if set((expected_balls).keys()).issubset(set(element.keys())):
             matches_so_far = True
             for key in expected_balls.keys():
-                if element[key] != expected_balls[key]:
+                if element[key] < expected_balls[key]:
                     matches_so_far = False
                     break
             if (matches_so_far):
