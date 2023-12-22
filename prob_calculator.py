@@ -24,7 +24,7 @@ class Hat:
 
         if n < 1:
             raise ValueError()
-        if n > len(self.data):
+        if n > len(self.contents):
             return self.contents
 
         contents_copy = copy.deepcopy(self.contents)
