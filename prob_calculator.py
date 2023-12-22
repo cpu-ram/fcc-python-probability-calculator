@@ -47,7 +47,7 @@ def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
     def array_to_dict(arr):
         return reduce(
             lambda x, y: {**x, y:
-                          x.get(y, 0)+1},
+                          x.get(y, 0) + 1},
             arr,
             {}
         )
