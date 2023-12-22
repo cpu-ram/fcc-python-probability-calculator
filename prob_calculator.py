@@ -54,9 +54,9 @@ def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
     draws_dict = list(map(array_to_dict, draws))
     matching_draw_count = 0
     for element in draws_dict:
-        if set(element.keys()) == set((expected_balls).keys()):
+        if set((expected_balls).keys()).issubset(set(element.keys())):
             matches_so_far = True
-            for key in element.keys():
+            for key in expected_balls.keys():
                 if element[key] != expected_balls[key]:
                     matches_so_far = False
                     break
